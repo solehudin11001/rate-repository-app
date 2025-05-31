@@ -1,15 +1,58 @@
-import { Text, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
+import Text from "./text";
+import Badge from "./badge";
+import CopyGroup from "./copy-group";
+import theme from "../theme";
 
 export default function RepositoryItem({ repository }) {
   return (
-    <View>
-      <Text>{repository.fullName}</Text>
-      <Text>{repository.description}</Text>
-      <Text>Laguage: {repository.fullName}</Text>
-      <Text>Start: {repository.stargazersCount.toLocaleString()}</Text>
-      <Text>Forks: {repository.forksCount.toLocaleString()}</Text>
-      <Text>Review: {repository.reviewCount.toLocaleString()}</Text>
-      <Text>Rating: {repository.ratingAverage.toLocaleString()}</Text>
+    <View style={styles.item}>
+      <View style={styles.itemBody}>
+        <Image style={styles.itemImage} source={{ uri: repository.ownerAvatarUrl }} alt="Avatar" />
+        <View style={styles.itemGroup}>
+          <View style={styles.itemCopy}>
+            <Text variant="subheading">{repository.fullName}</Text>
+            <Text>{repository.description}</Text>
+            <Badge text={repository.language} />
+          </View>
+          <View style={styles.itemList}>
+            <CopyGroup label="Stars" value={repository.stargazersCount} />
+            <CopyGroup label="Forks" value={repository.forksCount} />
+            <CopyGroup label="Reviews" value={repository.reviewCount} />
+            <CopyGroup label="Rating" value={repository.ratingAverage} />
+          </View>
+        </View>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  item: {
+    backgroundColor: theme.colors.backgroundSecondary,
+    marginBottom: 24,
+    padding: 14,
+  },
+  itemBody: {
+    flexDirection: "row",
+    gap: 24,
+  },
+  itemImage: {
+    borderRadius: 8,
+    height: 64,
+    width: 64,
+  },
+  itemGroup: {
+    flex: 1,
+    gap: 24,
+  },
+  itemCopy: {
+    alignItems: "flex-start",
+    flex: 1,
+    gap: 10,
+  },
+  itemList: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+});
