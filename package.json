@@ -20,7 +20,8 @@
     "@babel/eslint-parser": "^7.27.1",
     "eslint": "^9.28.0",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-native": "^5.0.0"
+    "eslint-plugin-react-native": "^5.0.0",
+    "react-devtools": "^6.1.2"
   },
   "private": true
 }
