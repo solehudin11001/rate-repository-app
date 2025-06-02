@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
   },
   itemImage: {
     borderRadius: 8,
-    height: 64,
-    width: 64,
+    height: 56,
+    width: 56,
   },
   itemGroup: {
     flex: 1,

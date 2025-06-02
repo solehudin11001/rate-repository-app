@@ -7,8 +7,8 @@ const theme = {
     primary: "#2b7fff",
   },
   fontSizes: {
-    body: 16,
-    subheading: 20,
+    body: 14,
+    subheading: 16,
   },
   fonts: {
     main: "System",

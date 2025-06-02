@@ -9,9 +9,7 @@ export default function CopyGroup({ label, value }) {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <Text variant="subheading" style={styles.value}>
-        {suffix(value)}
-      </Text>
+      <Text variant="subheading">{suffix(value)}</Text>
     </View>
   );
 }
@@ -22,9 +20,6 @@ const styles = StyleSheet.create({
     flexDirection: "column-reverse",
   },
   label: {
-    fontSize: 14,
-  },
-  value: {
-    fontSize: 18,
+    fontSize: 12,
   },
 });

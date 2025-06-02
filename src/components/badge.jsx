@@ -16,10 +16,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.primary,
     borderRadius: 8,
-    paddingHorizontal: 10,
+    paddingHorizontal: 8,
     paddingVertical: 8,
   },
   text: {
-    fontSize: 14,
+    fontSize: 12,
   },
 });

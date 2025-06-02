@@ -1,23 +1,18 @@
-import { Pressable, StyleSheet } from "react-native";
+import { Link } from "react-router-native";
 import Text from "./text";
-import theme from "../theme";
 
-export default function AppBarTab() {
+export const AppTab = () => {
   return (
-    <Pressable style={styles.container}>
-      <Text variant="subheading" style={styles.text}>
-        Repositories
-      </Text>
-    </Pressable>
+    <Link to="/">
+      <Text variant="subheading">Repositories</Text>
+    </Link>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 14,
-    paddingVertical: 24,
-  },
-  text: {
-    fontSize: 28,
-  },
-});
+export const SignInTab = () => {
+  return (
+    <Link to="/signin">
+      <Text variant="subheading">Sign In</Text>
+    </Link>
+  );
+};
