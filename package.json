@@ -12,6 +12,8 @@
   "dependencies": {
     "@apollo/client": "^3.13.8",
     "@expo/metro-config": "^0.20.14",
+    "@react-native-async-storage/async-storage": "2.1.2",
+    "dotenv": "^16.5.0",
     "expo": "~53.0.9",
     "expo-status-bar": "~2.2.3",
     "formik": "^2.4.6",

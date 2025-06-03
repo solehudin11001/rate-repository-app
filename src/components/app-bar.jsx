@@ -1,8 +1,14 @@
 import { View, StyleSheet, ScrollView } from "react-native";
-import { AppTab, SignInTab } from "./app-bar-tab";
+import { AppTab, SignInTab, SignOutTab } from "./app-bar-tab";
 import Constant from "expo-constants";
+import { useQuery } from "@apollo/client";
+import { ME } from "../graphql/queries";
 
 export default function AppBar() {
+  const { data } = useQuery(ME, {
+    fetchPolicy: "cache-and-network",
+  })
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -11,7 +17,7 @@ export default function AppBar() {
         contentContainerStyle={styles.scrollView}
       >
         <AppTab />
-        <SignInTab />
+        {data && data.me ? <SignOutTab /> : <SignInTab />}
       </ScrollView>
     </View>
   );
