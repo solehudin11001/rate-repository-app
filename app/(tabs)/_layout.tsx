@@ -21,6 +21,12 @@ export default function TabLayout() {
 					title: "Repositories",
 				}}
 			/>
+			<Tabs.Screen
+				name="login"
+				options={{
+					title: "Login",
+				}}
+			/>
 		</Tabs>
 	);
 }
