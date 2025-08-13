@@ -1,4 +1,5 @@
-import { View } from "react-native";
+import { colors } from "@/constants/theme";
+import { StyleSheet, View } from "react-native";
 import Text from "./text";
 
 interface Props {
@@ -7,15 +8,23 @@ interface Props {
 
 export default function Badge({ children }: Props) {
 	return (
-		<View
-			style={{
-				backgroundColor: "#006876",
-				borderRadius: 8,
-				paddingHorizontal: 12,
-				paddingVertical: 8,
-			}}
-		>
-			<Text style={{ color: "#ffffff" }}>{children}</Text>
+		<View style={styles.badge}>
+			<Text style={styles.badgeCopy}>{children}</Text>
 		</View>
 	);
 }
+
+const styles = StyleSheet.create({
+	badge: {
+		backgroundColor: colors.primary,
+		borderRadius: 6,
+		height: 32,
+		paddingHorizontal: 12,
+	},
+	badgeCopy: {
+		color: colors.onPrimary,
+		fontSize: 14,
+		fontWeight: 500,
+		lineHeight: 32,
+	},
+});

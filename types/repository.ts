@@ -1,4 +1,4 @@
-export interface Repository {
+export interface RepositoryType {
 	id: string;
 	fullName: string;
 	description: string;

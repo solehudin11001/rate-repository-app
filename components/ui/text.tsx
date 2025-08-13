@@ -1,3 +1,4 @@
+import { colors } from "@/constants/theme";
 import { Text as NativeText } from "react-native";
 
 interface Props extends React.ComponentProps<typeof NativeText> {
@@ -5,24 +6,24 @@ interface Props extends React.ComponentProps<typeof NativeText> {
 	size?: "base" | "md" | "lg";
 }
 
-const text = {
-	variants: {
-		primary: { color: "#171d1e", fontWeight: "600" },
-		default: { color: "#3f484a" },
-	},
-	size: {
-		base: { fontSize: 14, lineHeight: 20 },
-		md: { fontSize: 16, lineHeight: 24 },
-		lg: { fontSize: 20, lineHeight: 28 },
-	},
-};
-
 export default function Text({
 	variant = "default",
 	size = "base",
 	...props
 }: Props) {
 	return (
-		<NativeText style={[text.variants[variant], text.size[size]]} {...props} />
+		<NativeText style={[text.variants[variant], text.sizes[size]]} {...props} />
 	);
 }
+
+const text = {
+	variants: {
+		primary: { color: colors.onSurface, fontWeight: "500" },
+		default: { color: colors.onSurfaceVar },
+	},
+	sizes: {
+		base: { fontSize: 14, lineHeight: 20 },
+		md: { fontSize: 16, lineHeight: 24 },
+		lg: { fontSize: 18, lineHeight: 26 },
+	},
+};

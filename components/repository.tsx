@@ -1,6 +1,7 @@
-import { suffix } from "@/libs/utils";
+import { colors } from "@/constants/theme";
 import type { Repository as RepositoryType } from "@/types/repository";
-import { Image, View } from "react-native";
+import { suffix } from "@/utils/utils";
+import { Image, StyleSheet, View } from "react-native";
 import Badge from "./ui/badge";
 import Text from "./ui/text";
 
@@ -10,36 +11,16 @@ interface Props {
 
 export default function Repository({ item }: Props) {
 	return (
-		<View
-			style={{
-				backgroundColor: "#f5fafc",
-				gap: 24,
-				padding: 24,
-			}}
-		>
-			<View
-				style={{
-					flexDirection: "row",
-					gap: 24,
-				}}
-			>
+		<View style={styles.container}>
+			<View style={styles.info}>
 				<Image
 					source={{
 						uri: item.ownerAvatarUrl,
 					}}
 					alt={item.fullName}
-					style={{ borderRadius: 8, flexShrink: 0 }}
-					height={48}
-					width={48}
+					style={styles.image}
 				/>
-				<View
-					style={{
-						alignItems: "flex-start",
-						flexGrow: 1,
-						gap: 8,
-						width: 0,
-					}}
-				>
+				<View style={styles.copy}>
 					<Text variant="primary" size="lg">
 						{item.fullName}
 					</Text>
@@ -47,31 +28,26 @@ export default function Repository({ item }: Props) {
 					<Badge>{item.language}</Badge>
 				</View>
 			</View>
-			<View
-				style={{
-					flexDirection: "row",
-					justifyContent: "space-between",
-				}}
-			>
-				<View style={{ alignItems: "center" }}>
+			<View style={styles.stat}>
+				<View style={styles.statItem}>
 					<Text variant="primary" size="md">
 						{suffix(item.forksCount)}
 					</Text>
 					<Text>Stars</Text>
 				</View>
-				<View style={{ alignItems: "center" }}>
+				<View style={styles.statItem}>
 					<Text variant="primary" size="md">
 						{suffix(item.stargazersCount)}
 					</Text>
 					<Text>Forks</Text>
 				</View>
-				<View style={{ alignItems: "center" }}>
+				<View style={styles.statItem}>
 					<Text variant="primary" size="md">
 						{suffix(item.ratingAverage)}
 					</Text>
 					<Text>Rating</Text>
 				</View>
-				<View style={{ alignItems: "center" }}>
+				<View style={styles.statItem}>
 					<Text variant="primary" size="md">
 						{suffix(item.reviewCount)}
 					</Text>
@@ -81,3 +57,33 @@ export default function Repository({ item }: Props) {
 		</View>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: {
+		backgroundColor: colors.surfaceContainer,
+		gap: 20,
+		padding: 24,
+	},
+	info: {
+		flexDirection: "row",
+		gap: 20,
+	},
+	image: {
+		borderRadius: 8,
+		flexShrink: 0,
+		height: 64,
+		width: 64,
+	},
+	copy: {
+		alignItems: "flex-start",
+		flex: 1,
+		gap: 6,
+	},
+	stat: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+	},
+	statItem: {
+		alignItems: "center",
+	},
+});

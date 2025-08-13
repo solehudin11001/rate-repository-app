@@ -1,11 +1,12 @@
+import { colors } from "@/constants/theme";
 import { View } from "react-native";
 
 export default function Separator() {
 	return (
 		<View
 			style={{
-				backgroundColor: "#e9eff0",
-				height: 16,
+				backgroundColor: colors.surface,
+				height: 10,
 			}}
 		/>
 	);

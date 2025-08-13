@@ -1,5 +1,7 @@
+import Button from "@/components/ui/button";
+import { colors } from "@/constants/theme";
 import { Formik } from "formik";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import * as yup from "yup";
 
 const loginSchema = yup.object({
@@ -28,38 +30,33 @@ export default function Login() {
 					values,
 					errors,
 					touched,
+					isValid,
 				}) => (
 					<View style={styles.form}>
 						<TextInput
 							placeholder="Username"
-							style={[
-								styles.input,
-								errors.username && { borderColor: "#ba1a1a" },
-							]}
+							style={[styles.input, errors.username && styles.inputError]}
 							onChangeText={handleChange("username")}
 							onBlur={handleBlur("username")}
 							value={values.username}
 						/>
 						{touched.username && errors.username && (
-							<Text style={styles.errorText}>{errors.username}</Text>
+							<Text style={styles.textError}>{errors.username}</Text>
 						)}
 						<TextInput
 							secureTextEntry={true}
 							placeholder="Password"
-							style={[
-								styles.input,
-								errors.password && { borderColor: "#ba1a1a" },
-							]}
+							style={[styles.input, errors.password && styles.inputError]}
 							onChangeText={handleChange("password")}
 							onBlur={handleBlur("password")}
 							value={values.password}
 						/>
 						{touched.password && errors.password && (
-							<Text style={styles.errorText}>{errors.password}</Text>
+							<Text style={styles.textError}>{errors.password}</Text>
 						)}
-						<Pressable style={styles.button} onPress={() => handleSubmit()}>
-							<Text style={styles.text}>Login</Text>
-						</Pressable>
+						<Button disabled={!isValid} onPress={() => handleSubmit()}>
+							Login
+						</Button>
 					</View>
 				)}
 			</Formik>
@@ -69,35 +66,26 @@ export default function Login() {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: "#f5fafc",
-		height: "100%",
+		backgroundColor: colors.surfaceContainer,
+		flex: 1,
 	},
 	form: {
 		gap: 12,
 		padding: 24,
-		width: "100%",
 	},
 	input: {
-		borderColor: "#6f797b",
+		borderColor: colors.outline,
 		borderRadius: 8,
 		borderWidth: 1,
 		height: 48,
-		paddingHorizontal: 12,
+		paddingHorizontal: 16,
 	},
-	button: {
-		alignItems: "center",
-		justifyContent: "center",
-		backgroundColor: "#006876",
-		borderRadius: 8,
-		height: 48,
+	inputError: {
+		backgroundColor: colors.errorContainer,
+		borderColor: colors.error,
 	},
-	text: {
-		color: "#ffffff",
-		fontSize: 14,
-		fontWeight: 600,
-	},
-	errorText: {
-		color: "#ba1a1a",
+	textError: {
+		color: colors.error,
 		fontSize: 12,
 	},
 });
