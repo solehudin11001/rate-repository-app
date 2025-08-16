@@ -26,7 +26,7 @@ export default function TabLayout() {
 				}}
 			/>
 			<Tabs.Screen
-				name="login"
+				name="auth"
 				options={{
 					tabBarIcon: ({ color }) => (
 						<Octicons name="person" size={24} color={color} />

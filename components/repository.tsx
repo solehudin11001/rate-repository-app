@@ -1,5 +1,5 @@
 import { colors } from "@/constants/theme";
-import type { Repository as RepositoryType } from "@/types/repository";
+import type { RepositoryType } from "@/types/repository";
 import { suffix } from "@/utils/utils";
 import { Image, StyleSheet, View } from "react-native";
 import Badge from "./ui/badge";

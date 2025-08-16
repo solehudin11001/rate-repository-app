@@ -1,8 +1,19 @@
 import Button from "@/components/ui/button";
 import { colors } from "@/constants/theme";
+import { authConsumer } from "@/context/auth-provider";
+import { LOGIN } from "@/graphql/mutations";
+import { useAuth } from "@/hooks/useAuth";
+import { useApolloClient } from "@apollo/client";
+import { useRouter } from "expo-router";
 import { Formik } from "formik";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import * as yup from "yup";
+
+interface Auth {
+	authenticate: {
+		accessToken: string;
+	};
+}
 
 const loginSchema = yup.object({
 	username: yup.string().required("Username is required"),
@@ -13,13 +24,32 @@ const loginSchema = yup.object({
 });
 
 export default function Login() {
+	const [authenticate] = useAuth<Auth>(LOGIN);
+	const auth = authConsumer();
+	const client = useApolloClient();
+	const router = useRouter();
+
 	return (
 		<View style={styles.container}>
 			<Formik
 				initialValues={{ username: "", password: "" }}
 				validationSchema={loginSchema}
-				onSubmit={(values, actions) => {
-					console.log(values);
+				onSubmit={async (values, actions) => {
+					const { username, password } = values;
+
+					try {
+						const { data } = await authenticate(username, password);
+						if (data?.authenticate.accessToken) {
+							await auth?.storage.saveAccessToken(
+								data.authenticate.accessToken,
+							);
+							client.resetStore();
+							router.replace("/");
+						}
+					} catch (error) {
+						console.log("Failed to login: ", error);
+					}
+
 					actions.resetForm();
 				}}
 			>
