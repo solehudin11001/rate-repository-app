@@ -1,5 +1,5 @@
 import { colors } from "@/constants/theme";
-import type { RepositoryType } from "@/types/repository";
+import type { RepositoryType } from "@/types";
 import { suffix } from "@/utils/utils";
 import { Image, StyleSheet, View } from "react-native";
 import Badge from "./ui/badge";
@@ -11,7 +11,7 @@ interface Props {
 
 export default function Repository({ item }: Props) {
 	return (
-		<View style={styles.container}>
+		<View testID="repository" style={styles.container}>
 			<View style={styles.info}>
 				<Image
 					source={{
