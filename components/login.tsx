@@ -2,6 +2,7 @@ import { authConsumer } from "@/context/auth-provider";
 import { LOGIN } from "@/graphql/mutations";
 import { useAuth } from "@/hooks/useAuth";
 import type { AuthType } from "@/types";
+import { LOGINSCHEMA } from "@/types/schema";
 import { useApolloClient } from "@apollo/client";
 import { useRouter } from "expo-router";
 import Form from "./ui/form";
@@ -27,5 +28,5 @@ export default function Login() {
 		}
 	}
 
-	return <Form handleSubmit={handleLogin} />;
+	return <Form schema={LOGINSCHEMA} handleSubmit={handleLogin} />;
 }

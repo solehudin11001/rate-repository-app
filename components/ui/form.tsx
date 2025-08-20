@@ -2,29 +2,25 @@ import Button from "@/components/ui/button";
 import { colors } from "@/constants/theme";
 import { Formik } from "formik";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import * as yup from "yup";
+import type * as yup from "yup";
 
-interface Props {
+interface Props<T extends Record<string, string>> {
+	schema: yup.ObjectSchema<T>;
 	handleSubmit: (values: {
 		username: string;
 		password: string;
 	}) => Promise<void>;
 }
 
-const loginSchema = yup.object({
-	username: yup.string().required("Username is required"),
-	password: yup
-		.string()
-		.min(8, "Password must be at least 8 characters")
-		.required("Password is required"),
-});
-
-export default function Form({ handleSubmit }: Props) {
+export default function Form<T extends Record<string, string>>({
+	schema,
+	handleSubmit,
+}: Props<T>) {
 	return (
 		<View style={styles.container}>
 			<Formik
 				initialValues={{ username: "", password: "" }}
-				validationSchema={loginSchema}
+				validationSchema={schema}
 				onSubmit={async (values, actions) => {
 					await handleSubmit(values);
 					actions.resetForm();

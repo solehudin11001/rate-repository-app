@@ -38,3 +38,32 @@ export const REVIEWSCHEMA = yup.object({
 });
 
 export type ReviewSchemaType = yup.InferType<typeof REVIEWSCHEMA>;
+
+export const LOGINSCHEMA = yup.object({
+	username: yup.string().required("Username is required"),
+	password: yup
+		.string()
+		.trim()
+		.min(8, "Password must be at least 8 characters")
+		.required("Password is required"),
+});
+
+export const SIGNINSCHEMA = yup.object({
+	username: yup
+		.string()
+		.trim()
+		.min(5, "Username must be at least 5 character")
+		.max(30, "Username cannot be longer than 30 characters")
+		.required("Username is required"),
+	password: yup
+		.string()
+		.trim()
+		.min(5, "Password must be at least 5 character")
+		.max(30, "Password cannot be longer than 50 characters")
+		.required("Password is required"),
+	passwordConfirm: yup
+		.string()
+		.trim()
+		.oneOf([yup.ref("password"), "Password does not match"])
+		.required("Password confirm is required"),
+});
