@@ -1,17 +1,25 @@
 import { colors } from "@/constants/theme";
+import { authConsumer } from "@/context/auth-provider";
 import { StyleSheet, View } from "react-native";
+import Picker from "./ui/picker";
 import Text from "./ui/text";
 
-interface Props {
-	username: string;
+export interface Props {
+	sortedBy: string;
+	setSortedPicker: (sortedBy: string) => void;
 }
 
-export default function Header({ username }: Props) {
+export default function Header({ sortedBy, setSortedPicker }: Props) {
+	const auth = authConsumer();
+
 	return (
 		<View style={styles.header}>
-			<Text variant="primary" size="md">
-				Hello, {username}
-			</Text>
+			{auth?.user?.me && (
+				<Text variant="primary" size="md">
+					Hello, {auth.user.me.username}
+				</Text>
+			)}
+			<Picker sortedBy={sortedBy} setSortedPicker={setSortedPicker} />
 		</View>
 	);
 }
@@ -19,6 +27,9 @@ export default function Header({ username }: Props) {
 const styles = StyleSheet.create({
 	header: {
 		backgroundColor: colors.surface,
+		alignItems: "center",
+		flexDirection: "row",
+		justifyContent: "space-between",
 		padding: 24,
 	},
 });

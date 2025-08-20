@@ -1,11 +1,12 @@
 import { type DocumentNode, useQuery } from "@apollo/client";
 
-export function useRepositories<T>(query: DocumentNode, param?: string) {
+export function useRepositories<T>(
+	query: DocumentNode,
+	variables?: Record<string, string>,
+) {
 	const { data, error, loading, refetch } = useQuery<T>(query, {
 		fetchPolicy: "cache-and-network",
-		variables: {
-			id: param,
-		},
+		variables: variables,
 	});
 
 	if (error) {

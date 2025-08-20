@@ -1,20 +1,17 @@
-import Header from "@/components/header";
 import Repository from "@/components/repository";
 import Loader from "@/components/ui/loader";
 import Separator from "@/components/ui/separator";
-import { authConsumer } from "@/context/auth-provider";
 import type { RepositoriesType } from "@/types";
 import { router } from "expo-router";
 import { FlatList, Pressable, StyleSheet, View } from "react-native";
 
 interface Props {
+	children: React.ReactNode;
 	data: RepositoriesType | undefined;
 	loading: boolean;
 }
 
-export default function Repositorylist({ data, loading }: Props) {
-	const auth = authConsumer();
-
+export default function Repositorylist({ children, data, loading }: Props) {
 	if (loading) {
 		return <Loader />;
 	}
@@ -32,7 +29,7 @@ export default function Repositorylist({ data, loading }: Props) {
 
 	return (
 		<View style={styles.container}>
-			{auth?.user?.me && <Header username={auth.user.me.username} />}
+			{children}
 			<FlatList
 				data={repositoryNodes}
 				ItemSeparatorComponent={Separator}

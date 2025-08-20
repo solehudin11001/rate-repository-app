@@ -1,7 +1,8 @@
 import { colors } from "@/constants/theme";
 import type { RepositoryType } from "@/types";
 import { suffix } from "@/utils/utils";
-import { Image, StyleSheet, View } from "react-native";
+import { Image } from "expo-image";
+import { StyleSheet, View } from "react-native";
 import Badge from "./ui/badge";
 import Text from "./ui/text";
 
