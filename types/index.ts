@@ -50,6 +50,20 @@ export interface UserType {
 	me: {
 		id: string;
 		username: string;
+		reviews: {
+			edges: {
+				node: {
+					text: string;
+					repository: {
+						fullName: string;
+					};
+					id: string;
+					rating: number;
+					createdAt: string;
+					repositoryId: string;
+				};
+			}[];
+		};
 	};
 }
 

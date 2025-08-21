@@ -10,7 +10,7 @@ export function useRepositories<T>(
 	});
 
 	if (error) {
-		console.log("Failed to fetching repositories: ", error);
+		console.log("Failed to fetching: ", error);
 	}
 
 	return { repositories: data, loading, refetch };

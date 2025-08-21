@@ -1,7 +1,6 @@
-import { ME } from "@/graphql/queries";
-import type { ContextType, UserType } from "@/types";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
+import type { ContextType } from "@/types";
 import type { AuthStorage } from "@/utils/auth-storage";
-import { useQuery } from "@apollo/client";
 import { createContext, useContext } from "react";
 
 interface Props {
@@ -12,9 +11,9 @@ interface Props {
 const AuthContext = createContext<ContextType<AuthStorage> | null>(null);
 
 export function AuthProvider({ children, value }: Props) {
-	const { data } = useQuery<UserType>(ME);
+	const { user } = useCurrentUser();
 	const values = {
-		user: data,
+		user: user,
 		storage: value,
 	};
 

@@ -1,10 +1,13 @@
 import { colors } from "@/constants/theme";
+import { authConsumer } from "@/context/auth-provider";
 import Octicons from "@expo/vector-icons/Octicons";
 import Constants from "expo-constants";
 import { Tabs } from "expo-router";
 import { StyleSheet } from "react-native";
 
 export default function TabLayout() {
+	const auth = authConsumer();
+	const isLoggedIn = Boolean(auth?.user?.me);
 	return (
 		<Tabs
 			screenOptions={{
@@ -33,6 +36,16 @@ export default function TabLayout() {
 					),
 				}}
 			/>
+			<Tabs.Protected guard={isLoggedIn}>
+				<Tabs.Screen
+					name="reviews"
+					options={{
+						tabBarIcon: ({ color }) => (
+							<Octicons name="comment" size={24} color={color} />
+						),
+					}}
+				/>
+			</Tabs.Protected>
 		</Tabs>
 	);
 }

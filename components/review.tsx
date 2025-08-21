@@ -1,25 +1,27 @@
 import { colors } from "@/constants/theme";
-import type { ReviewsType } from "@/types";
 import { localeString } from "@/utils/utils";
 import { StyleSheet, View } from "react-native";
 import Text from "./ui/text";
 
 interface Props {
-	data: ReviewsType;
+	rating: number;
+	username: string;
+	date: string;
+	content: string;
 }
 
-export default function Review({ data }: Props) {
+export default function Review({ rating, username, date, content }: Props) {
 	return (
 		<View style={styles.review}>
 			<View style={styles.ranting}>
-				<Text size="md">{data.rating}</Text>
+				<Text size="md">{rating}</Text>
 			</View>
 			<View style={styles.copy}>
 				<Text variant="primary" size="md">
-					{data.user.username}
+					{username}
 				</Text>
-				<Text>{localeString(data.createdAt)}</Text>
-				<Text>{data.text}</Text>
+				<Text>{localeString(date)}</Text>
+				<Text>{content}</Text>
 			</View>
 		</View>
 	);

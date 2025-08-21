@@ -1,6 +1,6 @@
 import { colors } from "@/constants/theme";
 import { REVIEW } from "@/graphql/mutations";
-import { REPOSITORY_DETAILS } from "@/graphql/queries";
+import { ME, REPOSITORY_DETAILS } from "@/graphql/queries";
 import type { RepositoryDetailType } from "@/types";
 import type { ReviewSchemaType } from "@/types/schema";
 import { useMutation } from "@apollo/client";
@@ -23,6 +23,10 @@ export default function RepositoryDetail({ data }: Props) {
 			{
 				query: REPOSITORY_DETAILS,
 				variables: { id: data?.repository.id },
+			},
+			{
+				query: ME,
+				variables: { includeReviews: true },
 			},
 		],
 	});

@@ -37,7 +37,15 @@ export default function Route() {
 				data={reviewsNodes}
 				ItemSeparatorComponent={Separator}
 				ListHeaderComponent={() => <RepositoryDetail data={data} />}
-				renderItem={({ item }) => <Review key={item.id} data={item} />}
+				renderItem={({ item }) => (
+					<Review
+						key={item.id}
+						rating={item.rating}
+						username={item.user.username}
+						date={item.createdAt}
+						content={item.text}
+					/>
+				)}
 			/>
 		</>
 	);
