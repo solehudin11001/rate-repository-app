@@ -3,7 +3,11 @@ import Octicons from "@expo/vector-icons/Octicons";
 import { Picker as NativePicker } from "@react-native-picker/picker";
 import { useRef } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
-import type { Props } from "../header";
+
+export interface Props {
+	sortedBy: string;
+	setSortedPicker: (sortedBy: string) => void;
+}
 
 export default function Picker({ sortedBy, setSortedPicker }: Props) {
 	const pickerRef = useRef<NativePicker<string>>(null);

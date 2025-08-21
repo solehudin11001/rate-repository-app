@@ -12,7 +12,9 @@ export default function Route() {
 	const { id } = useLocalSearchParams<{ id: string }>();
 	const { repositories: data, loading } = useRepositories<RepositoryDetailType>(
 		REPOSITORY_DETAILS,
-		id,
+		{
+			id: id,
+		},
 	);
 
 	if (loading) {
