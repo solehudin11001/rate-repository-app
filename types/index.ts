@@ -12,9 +12,16 @@ export interface RepositoryType {
 
 export interface RepositoriesType {
 	repositories: {
+		totalCount: number;
 		edges: {
 			node: RepositoryType;
+			cursor: string;
 		}[];
+		pageInfo: {
+			endCursor: string;
+			startCursor: string;
+			hasNextPage: boolean;
+		};
 	};
 }
 
@@ -22,9 +29,16 @@ export interface RepositoryDetailType {
 	repository: RepositoryType & {
 		url: string;
 		reviews: {
+			totalCount: number;
 			edges: {
 				node: ReviewsType;
+				cursor: string;
 			}[];
+			pageInfo: {
+				endCursor: string;
+				startCursor: string;
+				hasNextPage: boolean;
+			};
 		};
 	};
 }

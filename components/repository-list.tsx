@@ -8,9 +8,10 @@ import { FlatList, Pressable, StyleSheet } from "react-native";
 interface Props {
 	data: RepositoriesType | undefined;
 	loading: boolean;
+	onEndReach: () => void;
 }
 
-export default function Repositorylist({ data, loading }: Props) {
+export default function Repositorylist({ data, loading, onEndReach }: Props) {
 	if (loading) {
 		return <Loader />;
 	}
@@ -36,6 +37,8 @@ export default function Repositorylist({ data, loading }: Props) {
 					<Repository item={item} />
 				</Pressable>
 			)}
+			onEndReached={onEndReach}
+			onEndReachedThreshold={0.5}
 			style={styles.container}
 		/>
 	);

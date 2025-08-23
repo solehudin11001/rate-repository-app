@@ -10,12 +10,14 @@ import { FlatList } from "react-native";
 
 export default function Route() {
 	const { id } = useLocalSearchParams<{ id: string }>();
-	const { repositories: data, loading } = useRepositories<RepositoryDetailType>(
-		REPOSITORY_DETAILS,
-		{
-			id: id,
-		},
-	);
+	const {
+		repositories: data,
+		loading,
+		fetchMore,
+	} = useRepositories<RepositoryDetailType>(REPOSITORY_DETAILS, {
+		first: 4,
+		id: id,
+	});
 
 	if (loading) {
 		return <Loader />;
@@ -24,6 +26,14 @@ export default function Route() {
 	const reviewsNodes = data
 		? data.repository.reviews.edges.map((edge) => edge.node)
 		: [];
+
+	function handleEndReach() {
+		if (data) {
+			const { pageInfo } = data.repository.reviews;
+			fetchMore(pageInfo.hasNextPage, pageInfo.endCursor);
+		}
+		console.log("review more");
+	}
 
 	return (
 		<>
@@ -46,6 +56,8 @@ export default function Route() {
 						content={item.text}
 					/>
 				)}
+				onEndReached={handleEndReach}
+				onEndReachedThreshold={0.5}
 			/>
 		</>
 	);

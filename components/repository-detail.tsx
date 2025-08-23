@@ -1,4 +1,5 @@
 import { colors } from "@/constants/theme";
+import { authConsumer } from "@/context/auth-provider";
 import { REVIEW } from "@/graphql/mutations";
 import { ME, REPOSITORY_DETAILS } from "@/graphql/queries";
 import type { RepositoryDetailType } from "@/types";
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export default function RepositoryDetail({ data }: Props) {
+	const auth = authConsumer();
 	const [modalVisible, setModalVisible] = useState(false);
 	const [mutate] = useMutation(REVIEW, {
 		refetchQueries: [
@@ -72,7 +74,7 @@ export default function RepositoryDetail({ data }: Props) {
 				<Button onPress={() => Linking.openURL(data?.repository.url || "")}>
 					Github
 				</Button>
-				<Button onPress={handleToggleModal}>Review</Button>
+				{auth?.user?.me && <Button onPress={handleToggleModal}>Review</Button>}
 			</View>
 		</View>
 	);

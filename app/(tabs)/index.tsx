@@ -19,14 +19,24 @@ export default function Index() {
 		return () => clearTimeout(debounce);
 	}, [query]);
 
-	const { repositories: data, loading } = useRepositories<RepositoriesType>(
-		REPOSITORIES,
-		{
-			searchKeyword: search,
-			orderBy: order,
-			orderDirection: direction,
-		},
-	);
+	const {
+		repositories: data,
+		loading,
+		fetchMore,
+	} = useRepositories<RepositoriesType>(REPOSITORIES, {
+		first: 5,
+		searchKeyword: search,
+		orderBy: order,
+		orderDirection: direction,
+	});
+
+	function handleEndReach() {
+		if (data) {
+			const { pageInfo } = data.repositories;
+			fetchMore(pageInfo.hasNextPage, pageInfo.endCursor);
+		}
+		console.log("repository more");
+	}
 
 	return (
 		<View style={styles.container}>
@@ -36,7 +46,11 @@ export default function Index() {
 				query={query}
 				setQuery={setQuery}
 			/>
-			<Repositorylist data={data} loading={loading} />
+			<Repositorylist
+				data={data}
+				loading={loading}
+				onEndReach={handleEndReach}
+			/>
 		</View>
 	);
 }
