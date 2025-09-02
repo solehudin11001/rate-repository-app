@@ -10,3 +10,27 @@ export interface TabsLabel {
 
 // Icon types
 export type Icon = React.ComponentProps<typeof MaterialIcons>["name"];
+
+// Arguments interface
+export interface ArgumentsQuery {
+	orderBy: string;
+	orderDirection: string;
+	searchKeyword: string;
+}
+
+// Arguments action type
+export type ArgumentsAction = React.Dispatch<
+	React.SetStateAction<ArgumentsQuery>
+>;
+
+// Repositories interface
+export interface Repositories {
+	repositories: {
+		edges: {
+			node: {
+				id: string;
+				fullName: string;
+			};
+		}[];
+	};
+}

@@ -1,8 +1,10 @@
+import { ApolloProvider } from "@apollo/client/react";
 import * as Font from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { ActivityIndicator, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { apolloClient } from "../lib/apollo";
 
 export default function Layout() {
 	const [fontsLoaded] = Font.useFonts({
@@ -19,11 +21,13 @@ export default function Layout() {
 	}
 
 	return (
-		<SafeAreaProvider>
-			<Stack>
-				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-			</Stack>
-			<StatusBar style="light" />
-		</SafeAreaProvider>
+		<ApolloProvider client={apolloClient}>
+			<SafeAreaProvider>
+				<Stack>
+					<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+				</Stack>
+				<StatusBar style="light" />
+			</SafeAreaProvider>
+		</ApolloProvider>
 	);
 }

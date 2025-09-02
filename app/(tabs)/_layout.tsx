@@ -2,7 +2,7 @@ import { TabList, TabSlot, Tabs, TabTrigger } from "expo-router/ui";
 import Animated, { useSharedValue } from "react-native-reanimated";
 import TabButton from "../../components/ui/tab-button";
 import { colors } from "../../constants/colors";
-import { tabsLabel } from "../../lib/variabels";
+import { TABS_LABEL } from "../../lib/variabels";
 
 export default function TabLayout() {
 	const left = useSharedValue(16);
@@ -36,7 +36,7 @@ export default function TabLayout() {
 						width: 64,
 					}}
 				/>
-				{tabsLabel.map(({ id, name, path, icon }) => (
+				{TABS_LABEL.map(({ id, name, path, icon }) => (
 					<TabTrigger key={id} name={name} href={path} asChild>
 						<TabButton animation={left} index={id} icon={icon} />
 					</TabTrigger>

@@ -6,10 +6,14 @@ interface Props extends React.ComponentProps<typeof NativeText> {
 }
 
 export default function Text({ weight = "regular", style, ...props }: Props) {
-	return <NativeText style={[styles[weight], style]} {...props} />;
+	return <NativeText style={[styles.text, styles[weight], style]} {...props} />;
 }
 
 const styles = StyleSheet.create({
+	text: {
+		fontSize: 14,
+		lineHeight: 24,
+	},
 	regular: {
 		color: colors.onSurfaceVariant,
 		fontFamily: "Roboto-Regular",
