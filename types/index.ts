@@ -27,10 +27,20 @@ export type ArgumentsAction = React.Dispatch<
 export interface Repositories {
 	repositories: {
 		edges: {
-			node: {
-				id: string;
-				fullName: string;
-			};
+			node: Repository;
 		}[];
 	};
+}
+
+// Repository interface
+export interface Repository {
+	id: string;
+	fullName: string;
+	language: string;
+	ownerAvatarUrl: string;
+	description: string;
+	stargazersCount: number;
+	forksCount: number;
+	reviewCount: number;
+	ratingAverage: number;
 }

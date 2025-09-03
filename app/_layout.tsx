@@ -1,9 +1,8 @@
 import { ApolloProvider } from "@apollo/client/react";
 import * as Font from "expo-font";
 import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 import { ActivityIndicator, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { colors } from "../constants/colors";
 import { apolloClient } from "../lib/apollo";
 
 export default function Layout() {
@@ -15,19 +14,16 @@ export default function Layout() {
 	if (!fontsLoaded) {
 		return (
 			<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-				<ActivityIndicator size="large" />
+				<ActivityIndicator size="large" color={colors.primary} />
 			</View>
 		);
 	}
 
 	return (
 		<ApolloProvider client={apolloClient}>
-			<SafeAreaProvider>
-				<Stack>
-					<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-				</Stack>
-				<StatusBar style="light" />
-			</SafeAreaProvider>
+			<Stack>
+				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+			</Stack>
 		</ApolloProvider>
 	);
 }

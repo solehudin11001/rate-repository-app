@@ -33,6 +33,7 @@ export default function Picker() {
 								style={{
 									backgroundColor: colors.surfaceContainer,
 									borderRadius: 24,
+									elevation: 16,
 									padding: 8,
 									position: "absolute",
 									right: 24,

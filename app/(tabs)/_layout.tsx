@@ -15,6 +15,7 @@ export default function TabLayout() {
 					alignItems: "center",
 					backgroundColor: colors.surfaceContainer,
 					borderRadius: 32,
+					elevation: 16,
 					height: 64,
 					gap: 24,
 					paddingHorizontal: 16,
